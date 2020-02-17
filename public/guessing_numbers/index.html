@@ -11,6 +11,7 @@
         
         <!--Custom Styles-->
         <link href="css/styles.css" rel="stylesheet" type="text/css" />
+        guessField.focus();
     </head>
     <body>
 
@@ -22,31 +23,29 @@
             Guess a number between 1 and 99 in seven attempts!
             
             <br><br>
-            Random Number: <span id = "numberToGuess"></span>
+            <label for="guessField">Enter a guess: </label>
+            <input type="text" id="guessField" class="guessField">
+            <input type="submit" value="Submit guess" class="guessSubmit">
+            
+            <br><br>
+            <p id="guesses"></p>
+            <p id="lastResult"></p>
+            <p id="lowOrHi"></p>
+            <button id='reset'>Reset</button>
+            
+            
         </div>
         
-        <script>
+        <div id="records">
+            Wins/Losses  (<span id="wins"></span>/<span id="losses"></span>)
+            <br>
+            Total Games Played Since Loading Page: <span id="totalGames"></span>
+            <br>
+        </div>
         
-            /* 
-            var randomNumber = 5 + 6;
-            console.log;
-            
-            randomNumber = Math.floor(Math.random() * 99) + 1;
-            console.log(randomNumber);
-            document.getElementById("numberToGuess").innerHTML = randomNumber;
-            */
-            var randomNumber = Math.floor(Math.random() * 99) + 1;
-            var guesses = document.querySelector('#guesses');
-            var lastResult = document.querySelector('#lastResult');
-            var lowOrHi = document.querySelector('#lowOrHi');
-            
-            var guessSubmit = document.querySelector('.guessSubmit');
-            var guessField = document.querySelector('.guessField');
-            
-            var guessCount = 1;
-            var resetButtom = document.querySelector('#reset');
-            
-        </script>
+        
+        
+        <script src="js/function.js"></script>
         
     </body>
 </html>
