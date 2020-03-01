@@ -52,7 +52,6 @@ function checkGuess(){
     }
     guessCount++;
     guessField.value = '';
-    guessField.focus();
 }
 guessSubmit.addEventListener('click', checkGuess);
 
@@ -76,9 +75,9 @@ function resetGame(){
     for ( var i = 0; i < resetParas.length; i++ ){
         resetParas[i].textContent = '';
     }
-        guesses.innerHTML = '';
-        lastResult.innerHTML = '';
-        lowOrHi.innerHTML = '';
+    guesses.innerHTML = '';
+    lastResult.innerHTML = '';
+    lowOrHi.innerHTML = '';
     resetButton.style.display = 'none';
     guessField.disabled = false;
     guessSubmit.disabled = false;

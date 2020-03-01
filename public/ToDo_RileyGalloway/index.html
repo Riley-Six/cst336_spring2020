@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <meta charset="utf-8" />
+        <title>To-Do List</title>
+        
+    
+
+    </head>
+    <body class = "text-center">
+        <h3>Completed?</h3>
+        <input type="radio" name"tORf" id="F" value="False"> <label for="F">False</label>
+        <input type="radio" name"tORf" id="T" value="True"> <label for="T">True</label>
+        <br>
+        <div id="tORfanswer"></div>
+        <br>
+        
+        
+        <form method="post">
+            User ID: <input type="int" id="userid"> <br>
+            ID: <input type="int" id="id"> <br>
+            Title: <input type="text" id="title"> <br>
+            Completed: <input type="boolean" id="completed"> <br>
+        </form>
+        
+        <button class="btn btn-success"> Querey Todos </button>
+        
+        <script>
+            $("button").on("click", gradeQuiz);
+            
+            
+            function getToDoS(){
+                $.ajax({
+                    type: "get",
+                    url: "https://jsonplaceholder.typicode.com/todos",
+                    dataType: "json",
+                    data: {
+                        
+                    },
+                    success: function(data,status) {
+                        
+                    }
+                    
+                });
+            }
+
+        </script>
+    </body>
+</html>

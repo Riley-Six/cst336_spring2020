@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> Sign Up Page </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  
+  <body>
+    <h1> Sign Up  </h1>
+      <form id="signupForm" method="get" action="welcome.html">
+        First Name:   <input type="text" name="fName"><br>
+        Last Name:    <input type="text" name="lName"><br>
+        Gender:       <input type="radio" name="gender" value="m"> Male
+                      <input type="radio" name="gender" value="f"> Female<br><br>
+        
+        Zip Code:     <input type="text" name="zip" id="zip">
+                      <span id="zipErrorr"></span><br>
+        City:         <span id="city"></span><br>
+        Latitude:     <span id="latitude"></span><br>
+        Longitude:    <span id="longitude"></span><br><br>
+        
+        State: 
+        <select id="state" name="state"></select><br />
+        
+        Select a County: <select id="county"></select><br><br>
+        
+        Desired Username: <input type="text" id="username" name="username"><br>
+                          <span id="usernameError"></span><br>
+        Password:         <input type="text" id="password" name="password"><br>
+                          <span id="passwordLengthError"></span><br>
+        Password Again:   <input type="text" id="passwordAgain" name="passwordAgain"><br>
+                          <span id="passwordAgainError"></span><br /><br>
+        
+        <input type="submit" value="Sign up!">
+      </form>
+      
+    <script>
+        var usernameAvailable = false;
+
+        $("#zip").on("change", function() {
+            $.ajax({
+                method: "GET",
+                url: "https://itcdland.csumb.edu/~milara/ajax/cityInfoByZip.php",
+                dataType: "json",
+                data: { "zip": $("#zip").val() },
+                success: function(result, status) {
+                    $("#city").html("There is no city with this zipcode.");
+                    $("#latitude").html("----");
+                    $("#longitude").html("----");
+                    $("#city").html(result.city);
+                    $("#latitude").html(result.latitude);
+                    $("#longitude").html(result.longitude);
+                    // if($("#city").html(result.city) == ""){
+                    //     $("#zipErrorr").html("Zipcode not found");
+                    // }
+                },
+                // error: function(result, status){
+                //     $("#zipErrorr").html("Zipcode not found");
+                // }
+                // error: function (status, err) {
+                //     $("zipErrorr").html("Zipcode not found");
+                // }
+            });
+        });
+        
+        $("#state").on("change", function(){
+            $.ajax({
+                method: "GET",
+                url: "https://itcdland.csumb.edu/~milara/ajax/countyList.php",
+                dataType: "json",
+                data: { "state": $("#state").val()},
+                success: function(result, status) 
+                {
+                    $("#county").html("<option> Select One </option>");
+                    for(let i = 0; i < result.length; i++) 
+                    {
+                        $("#county").append("<option>" + result[i].county + "</option>");
+                    }
+
+                }
+            }); 
+        }); 
+        
+        $(function(){
+            $.ajax({
+                method: "GET",
+                url: "https://itcdland.csumb.edu/~milara/ajax/states.php",
+                dataType: "json",
+                data: { "state": $("#state").val()},
+                success: function(result, status) {
+                    $("#state").html("<option> Select One </option>");
+                    for(let i = 0; i < result.length; i++) {
+                        //<option value = "">Select One</option>
+                        $("#state").append("<option value =" + "\"" + result[i].usps + "\"" + ">" + result[i].state + "</option>");
+                    }
+
+                }
+            }); 
+        }); 
+        //username checker
+        $("#username").change(function() {
+            $.ajax({
+                method: "GET",
+                url: "https://cst336.herokuapp.com/projects/api/usernamesAPI.php",
+                dataType: "json",
+                data: { "username": $("#username").val() },
+                success: function(result, status) {
+                    if (result.available) {
+                        $("#usernameError").html("Username is available!");
+                        $("#usernameError").css("color", "green");
+                        usernameAvailable = true;
+                    } else {
+                        $("#usernameError").html("Username is unavailable!");
+                        $("#usernameError").css("color", "red");
+                        usernameAvailable = false;
+                    }
+                }
+            });
+        });
+        //prevent if not valid
+        $("#signupForm").submit(function(event) {
+            //Valid Check Used
+            if (!isFormValid()) {
+                event.preventDefault();
+            }
+        });
+        //Valid Check
+        function isFormValid() {
+            var isValid = true;
+            if (!usernameAvailable) {
+                isValid = false;
+            } else if ($("#username").val().length == 0) {
+                isValid = false;
+                $("#usernameError").html("Username is required");
+            } else if ($("#password").val().length <= 5){
+                $("#passwordLengthError").html("Password must be 6 or more characters long!");
+                isValid = false;
+            } else if ($("#password").val() != $("#passwordAgain").val()) {
+                $("#passwordAgainError").html("Password Mismatch!");
+                isValid = false;
+            }
+            return isValid;
+        }
+    </script>
+  </body>
+</html>
