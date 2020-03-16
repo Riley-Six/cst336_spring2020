@@ -10,7 +10,6 @@ $("#genderLookup").submit(function(e) {
             "name": input
         },
         success: function(result) {
-
             if (result[0].gender == "m") {
                 $("#genderResult").html("Male");
                 $("#genderResult").css("background", "aqua");
