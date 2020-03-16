@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    
+    
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+        crossorigin="anonymous">
+        <title>Dog QUiz???</title>
+        <link href="css/styles.css" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+    </head>
+    
+    <body>
+        <h1>Random Dogs Gallery</h1> 
+        <!--<h5>Please enter the number of dogs you wish to generate.</h5>-->
+        Please enter the number of dogs you wish to generate. <br>
+        <!--<h5>Number of images.</h5> <button class="btn btn-success"> Submit Quiz </button>-->
+        Number of images: <input type="integer" name="numberOfDogs" placeholder="0" id="query">
+        <button class="btn btn-primary"> Generate </button>
+        
+    </body>
+    
+    
+    <script>
+         $(document).ready(function() {
+             
+             $("#search").on('click', submitSearch);
+             
+             function submitSearch() {
+                 $.ajax({
+                    method: "GET"
+                    url: "https://dog.ceo/api/breeds/image/random/" + $("#query").val();
+                    type: "get",
+                    dataType: Json; 
+                    success: function(result, status) {
+                        
+                        process_image_results(response);
+                        
+                        
+                    },
+                });
+                 
+             }
+             
+             function process_image_results(response) {
+                 
+                 
+             }
+
+         });
+    </script>
+    
+    
+</html>

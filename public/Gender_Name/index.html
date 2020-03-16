@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Gender Display (Working title)</title>
+        <link href="css/styles.css" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Find the historical gender of any name.</h1>
+			    <form id="genderLookup" method="get">
+                    <label class="col-sm-2">Enter A Name:</label>
+                    <input id="searchedName" class="col-sm-4" type="text" name="searchedName">
+                    <button class="btn btn-primary" type="submit" id="nameSearch"> Search </button>
+                </form>
+                
+            </div>
+            
+            <div>
+                <h2 class = "flex-item" id="genderResult"></h4><br>
+                <h2 class = "flex-item" id="genderImage"></h4>
+            </div>
+            
+            
+        </div>
+        
+        <script type="text/javascript" SRC="function.js"></script>
+        
+    </body>
+    
+</html>
