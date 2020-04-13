@@ -11,10 +11,10 @@
                 <h3><%= data["ISBN:" + query].title %></h3>
 
                 <h2>
-                Authors: <%= data["ISBN:" + query].by_statement %>
-                Publishers: <%= data["ISBN:" + query].publishers[0].name %>
-                Publish Date: <%= data["ISBN:" + query].publish_date %>
-                Number of Pages: <%= data["ISBN:" + query].number_of_pages %>
+                Authors: <%= data["ISBN:" + query].by_statement %> <br>
+                Publishers: <%= data["ISBN:" + query].publishers[0].name %> <br>
+                Publish Date: <%= data["ISBN:" + query].publish_date %> <br>
+                Number of Pages: <%= data["ISBN:" + query].number_of_pages %> <br>
                 </h2>
                 <img class="poster" src="<%= data["ISBN:" + query].cover.large %>">
            
